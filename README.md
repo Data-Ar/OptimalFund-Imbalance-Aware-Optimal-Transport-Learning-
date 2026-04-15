@@ -11,7 +11,7 @@ It supports multiple backbones, referable-DR operating-point metrics, and optima
 - Evaluates performance on phone test severities: `clean`, `mild`, `moderate`, `severe`.
 - Exports per-run raw metrics and aggregated clinical summaries to CSV.
 ## Proposed Architecture
-
+![Optimal Transport Method](./optimal%20transport%20method.png)
 ## Repository Structure
 
 ```text
