@@ -15,26 +15,29 @@ It supports multiple backbones, referable-DR operating-point metrics, and optima
 ## Repository Structure
 
 ```text
-DR_severity_github_repo/
-├── main.py                    # Main training + OT sweep entrypoint
-├── eval.py                    # Quick evaluation entrypoint
-├── dataset/
-│   ├── dr_dataset.py
-│   └── loaders.py
-├── model/
-│   └── dr_model.py
-├── loss/
-│   ├── focal.py
-│   └── ot.py
-├── train/
-│   ├── train_loop.py
-│   └── sweep.py
-└── util/
-    ├── config.py
-    ├── metrics.py
-    ├── reproducibility.py
-    └── transforms.py
+src/optimalfund_dr/
+  cli.py            command-line interface
+  config.py         experiment configuration
+  data.py           datasets and loaders
+  model.py          backbone + classification head
+  losses.py         prototype and Sinkhorn OT losses
+  metrics.py        AUC, QWK, thresholds, bootstrap
+  checkpointing.py  resumable checkpoints and prediction CSVs
+  engine.py         one backbone/seed experiment
+  sweep.py          multi-seed / multi-method sweeps
 ```
+
+## Methods
+
+| CLI value | Name | Description |
+| --- | --- | --- |
+| `none` | ERM | Supervised training on hospital + phone batches, no OT term |
+| `prototype` | Prototype OT | Align class-wise mean embeddings |
+| `sinkhorn` | Global Sinkhorn OT | Entropic OT between hospital and phone features |
+| `class_sinkhorn` | Class-conditional Sinkhorn OT | Sinkhorn OT computed independently per class |
+
+Default backbones: `resnet50`, `mobilevit_s`, `efficientnet_b0`, `mobileone_s4`.
+
 
 ## Requirements
 
